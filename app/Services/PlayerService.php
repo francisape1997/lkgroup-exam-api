@@ -10,7 +10,7 @@ class PlayerService
 
     public function getPlayers()
     {
-        return $this->player->paginate(request()->per_page);
+        return $this->player->orderBy('created_at', 'DESC')->paginate(request()->per_page);
     }
 
     public function storePlayer($request)
