@@ -45,13 +45,4 @@ class Player extends Model
 
         return ceil(($threat / 10) + ($creativity / 10) + ($influence / 10));
     }
-
-    public function toArray()
-    {
-        return
-        [
-            'id'        => $this->id,
-            'full_name' => $this->full_name,
-        ];
-    }
 }
