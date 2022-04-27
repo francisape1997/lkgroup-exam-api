@@ -39,6 +39,13 @@ class PlayerController extends Controller
         return response()->json($response);
     }
 
+    public function create()
+    {
+        return response()->json([
+            'metrics' => config('player.metric'),
+        ]);
+    }
+
     public function edit($id)
     {
         $response = new EditPlayerResource($this->playerService->showPlayer($id));
