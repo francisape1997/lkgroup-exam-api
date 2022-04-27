@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 # Requests
 use App\Http\Requests\StorePlayerRequest;
 use App\Http\Requests\UpdatePlayerRequest;
-
-# Interfaces
 
 # Services
 use App\Services\PlayerService;
 
 # Resources
+use App\Http\Resources\PlayerResource;
 use App\Http\Resources\StorePlayerResource;
 use App\Http\Resources\ShowPlayerResource;
 use App\Http\Resources\EditPlayerResource;
@@ -25,7 +22,7 @@ class PlayerController extends Controller
 
     public function index()
     {
-        return response($this->playerService->getPlayers());
+        return PlayerResource::collection($this->playerService->getPlayers());
     }
 
     public function store(StorePlayerRequest $request)
@@ -58,6 +55,8 @@ class PlayerController extends Controller
 
     public function destroy($id)
     {
-        return response()->json($this->playerService->deletePlayer($id));
+        return response()->json([
+            'deleted' => $this->playerService->deletePlayer($id),
+        ]);
     }
 }
